@@ -1,13 +1,8 @@
 
 import { useLocation } from "react-router-dom";
-import ThemeToggle from "./ThemeToggle";
 
-function Header({
-  search,
-  setSearch,
-  darkMode,
-  setDarkMode
-}) {
+
+function Header({ search, setSearch }) {
   const location = useLocation();
 
   return (

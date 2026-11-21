@@ -113,12 +113,7 @@ function App() {
       <Sidebar />
 
       <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">
-        <Header
-          search={search}
-          setSearch={setSearch}
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
-        />
+        <Header search={search} setSearch={setSearch} />
 
         <Routes>
           <Route
