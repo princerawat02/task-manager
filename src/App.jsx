@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
@@ -57,6 +58,10 @@ const initialTasks = [
 ];
 
 function App() {
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("theme") !== "light";
+  });
+
   const [tasks, setTasks] = useState(() => {
     try {
       const saved = localStorage.getItem("tasks");
@@ -67,6 +72,11 @@ function App() {
   });
 
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -109,11 +119,16 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 md:flex">
+    <div className="min-h-screen bg-slate-50 text-slate-800 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100 md:flex">
       <Sidebar />
 
-      <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">
-        <Header search={search} setSearch={setSearch} />
+      <main className="min-w-0 flex-1 bg-slate-50 p-4 text-slate-800 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100 sm:p-6 lg:p-8">
+        <Header
+          search={search}
+          setSearch={setSearch}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+        />
 
         <Routes>
           <Route
